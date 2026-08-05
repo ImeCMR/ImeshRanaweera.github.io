@@ -1,0 +1,74 @@
+version: 1
+project:
+  title: Imesh Chamara Madusanka Ranaweera
+  description: Academic CV of Imesh Ranaweera, PhD student in Theoretical and Computational Chemistry at the University of Florida. Research interests in computational chemistry, drug discovery, machine learning, and artificial intelligence.
+  # thumbnail: images/profile-thumbnail.webp
+  # authors:
+  #   - name: Imesh Chamara Madusanka Ranaweera
+  #     email: imesh.ranaweera@ufl.edu
+  #     orcid: 0000-0000-0000-0000
+  #     url: https://imesh-ranaweera.github.io
+  #     affiliations:
+  #       - University of Florida
+  copyright: '2026'
+  keywords:
+    - Computational Chemistry
+    - Drug Discovery
+    - Machine Learning
+    - Artificial Intelligence
+    - Theoretical Chemistry
+  # github: ImeCMR/ImeshRanaweera
+  exclude:
+    - _build
+    - Thumbs.db
+    - .DS_Store
+    - '**.ipynb_checkpoints'
+    - cv.typ
+    - cv.pdf
+    - generate_cv.py
+    - generate_rss.py
+    - inject_comments.py
+    - rss.xml
+    - atom.xml
+    - fonts/**
+    - CONDUCT.md
+    - CONTRIBUTING.md
+    - README.md
+  toc:
+    - file: index.md
+    - file: pages/about.md
+    - file: pages/research.md
+    - file: pages/software.md
+    - file: pages/teaching.md
+    - file: pages/talks.md
+    - file: pages/awards.md
+    - file: pages/services.md
+    - file: pages/contact.md
+    - file: pages/news.md
+    - file: pages/blog.md
+    - pattern: blog/*.md
+      hidden: true
+site:
+  options:
+    logo: logo.png
+    logo_dark: logo.png
+    favicon: fav.ico
+    style: custom.css
+    # analytics_google: G-XXXXXXXXXX
+    folders: true
+  actions:
+    - title: CV (PDF)
+      url: cv.pdf
+    - title: RSS
+      url: rss.xml
+  template: book-theme
+  parts:
+    primary_sidebar_footer: |
+      [CV (PDF)](cv.pdf) |
+      [GitHub](https://github.com/ImeCMR) |
+      [LinkedIn](https://www.linkedin.com/in/imesh-chamara/)
+    footer: |
+      [CV (PDF)](cv.pdf) |
+      [GitHub](https://github.com/ImeCMR) |
+      [LinkedIn](https://www.linkedin.com/in/imesh-chamara/) |
+      [Email](mailto:imesh.ranaweera@ufl.edu)
