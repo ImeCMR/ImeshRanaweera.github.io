@@ -3,9 +3,7 @@ PROFESSIONAL ACADEMIC PORTFOLIO
 Clean, readable design for researchers
 ======================================== */
 
-/* --- CSS VARIABLES --- */
 :root {
-    /* Colors - light purple minimal theme */
     --primary: #221a2f;
     --secondary: #5c5570;
     --accent: #7c6acb;
@@ -17,23 +15,19 @@ Clean, readable design for researchers
     --text-secondary: #5c5570;
     --text-muted: #7b7490;
 
-    /* Typography */
     --font-serif: 'Crimson Pro', 'Georgia', serif;
     --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
 
-    /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 3rem;
     --spacing-xl: 4rem;
 
-    /* Layout */
     --max-width: 1100px;
     --max-width-narrow: 800px;
 }
 
-/* --- RESET & BASE STYLES --- */
 * {
     margin: 0;
     padding: 0;
@@ -92,7 +86,7 @@ ul {
     padding: 0 var(--spacing-md);
 }
 
-/* --- NAVIGATION --- */
+/* Navigation */
 .nav {
     position: fixed;
     top: 0;
@@ -114,12 +108,9 @@ ul {
     align-items: center;
 }
 
-.nav-logo {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary);
-    letter-spacing: 0.5px;
+.nav-spacer {
+    width: 160px;
+    flex-shrink: 0;
 }
 
 .nav-menu {
@@ -141,7 +132,7 @@ ul {
     border-bottom-color: var(--accent);
 }
 
-/* --- HEADER --- */
+/* Header */
 .header {
     padding: calc(var(--spacing-xl) + 60px) 0 var(--spacing-xl) 0;
     background: linear-gradient(to bottom, var(--bg-alt) 0%, var(--bg-main) 100%);
@@ -238,7 +229,13 @@ ul {
     color: white;
 }
 
-/* --- SECTIONS --- */
+.link-button svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Sections */
 .section {
     padding: var(--spacing-xl) 0;
 }
@@ -263,7 +260,7 @@ ul {
     color: var(--primary);
 }
 
-/* --- ABOUT SECTION --- */
+/* About */
 .about-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -297,8 +294,7 @@ ul {
 }
 
 .interests-list li {
-    padding: 0.4rem 0;
-    padding-left: 1.2rem;
+    padding: 0.4rem 0 0.4rem 1.2rem;
     position: relative;
     font-size: 0.95rem;
     color: var(--text-secondary);
@@ -313,7 +309,7 @@ ul {
     font-weight: bold;
 }
 
-/* --- RESEARCH METRICS SECTION --- */
+/* Metrics */
 .metrics-container {
     max-width: var(--max-width-narrow);
     margin: var(--spacing-md) auto 0;
@@ -391,7 +387,7 @@ ul {
     box-shadow: 0 4px 12px rgba(124, 106, 203, 0.18);
 }
 
-/* --- TIMELINE --- */
+/* Timeline */
 .timeline {
     max-width: var(--max-width-narrow);
     margin: var(--spacing-md) auto 0;
@@ -443,7 +439,7 @@ ul {
     margin-top: 0.5rem;
 }
 
-/* --- EDUCATION --- */
+/* Education */
 .education-grid {
     display: grid;
     gap: var(--spacing-lg);
@@ -455,10 +451,6 @@ ul {
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: var(--spacing-md);
-}
-
-.section-alt .education-card {
-    background: var(--bg-alt);
 }
 
 .degree-header {
@@ -487,15 +479,10 @@ ul {
     margin-bottom: var(--spacing-sm);
 }
 
-.program-detail {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-}
-
+.program-detail,
 .gpa {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    margin-bottom: 0.3rem;
 }
 
 .institutions {
@@ -518,13 +505,11 @@ ul {
 }
 
 .course-list {
-    list-style: none;
     margin-top: 0.5rem;
 }
 
 .course-list li {
-    padding: 0.25rem 0;
-    padding-left: 1.2rem;
+    padding: 0.25rem 0 0.25rem 1.2rem;
     position: relative;
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -537,7 +522,7 @@ ul {
     color: var(--text-muted);
 }
 
-/* --- PUBLICATIONS --- */
+/* Publications */
 .publications-section {
     margin-bottom: var(--spacing-lg);
 }
@@ -564,6 +549,13 @@ ul {
     font-style: italic;
 }
 
+.doi {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-family: 'Courier New', monospace;
+    word-break: break-word;
+}
+
 .project-list {
     display: grid;
     gap: var(--spacing-md);
@@ -588,13 +580,7 @@ ul {
     margin-bottom: 0.3rem;
 }
 
-.doi {
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-family: 'Courier New', monospace;
-}
-
-/* --- SKILLS --- */
+/* Skills */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -622,7 +608,7 @@ ul {
     margin: 0;
 }
 
-/* --- ACTIVITIES --- */
+/* Activities */
 .activities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -690,7 +676,7 @@ ul {
     color: var(--text-secondary);
 }
 
-/* --- FOOTER --- */
+/* Footer */
 .footer {
     background: var(--bg-alt);
     border-top: 1px solid var(--border);
@@ -705,12 +691,9 @@ ul {
     margin: 0;
 }
 
-/* --- RESPONSIVE DESIGN --- */
+/* Responsive */
 @media (max-width: 900px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .about-grid,
     .activities-grid {
         grid-template-columns: 1fr;
     }
@@ -719,6 +702,14 @@ ul {
 @media (max-width: 768px) {
     :root {
         font-size: 15px;
+    }
+
+    .nav-spacer {
+        display: none;
+    }
+
+    .nav-container {
+        justify-content: center;
     }
 
     .nav-menu {
@@ -743,7 +734,8 @@ ul {
         font-size: 1.15rem;
     }
 
-    .metrics-grid {
+    .metrics-grid,
+    .skills-grid {
         grid-template-columns: 1fr;
     }
 
@@ -760,10 +752,6 @@ ul {
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 480px) {
@@ -777,7 +765,6 @@ ul {
     }
 }
 
-/* --- PRINT STYLES --- */
 @media print {
     .nav,
     .footer {
