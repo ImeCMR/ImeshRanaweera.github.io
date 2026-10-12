@@ -17,5 +17,16 @@ your-portfolio/
 ├── sitemap.xml
 ├── style.css
 └── assets/
-    ├── Imesh_Ranaweera_CV_2026_August.pdf
+    ├── Imesh_Ranaweera_CV.pdf   (auto-updated from Overleaf)
     └── profile.png
+```
+
+## Updating the CV
+
+The CV is written in Overleaf and synced to this site automatically:
+
+1. Edit the CV in Overleaf. That's it.
+2. Every night, the `Update CV from Overleaf` GitHub Action clones the Overleaf project, compiles it, and commits `assets/Imesh_Ranaweera_CV.pdf` if the source changed.
+3. To update right away: GitHub → **Actions** → **Update CV from Overleaf** → **Run workflow**.
+
+One-time setup: create an Overleaf Git token (Overleaf → Account Settings → Git Integration) and save it as the repository secret `OVERLEAF_TOKEN` (GitHub → Settings → Secrets and variables → Actions).

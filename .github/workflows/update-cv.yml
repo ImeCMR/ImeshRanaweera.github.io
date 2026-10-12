@@ -1,0 +1,77 @@
+name: Update CV from Overleaf
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # daily, ~3-4am US Eastern
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  OVERLEAF_PROJECT: 6a734461996cb4bb7cea8420
+  # Leave empty to auto-detect the .tex file containing \documentclass
+  ROOT_FILE: ''
+  CV_PDF: assets/Imesh_Ranaweera_CV.pdf
+  SHA_FILE: assets/.cv-source-sha
+
+jobs:
+  update-cv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone Overleaf project
+        env:
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: git clone --depth 1 "https://git:${OVERLEAF_TOKEN}@git.overleaf.com/${OVERLEAF_PROJECT}" cv-src
+
+      - name: Check for changes
+        id: check
+        run: |
+          sha=$(git -C cv-src rev-parse HEAD)
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          if [ -f "$SHA_FILE" ] && [ "$(cat "$SHA_FILE")" = "$sha" ]; then
+            echo "CV source unchanged ($sha); nothing to do."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Find root file and engine
+        if: steps.check.outputs.changed == 'true'
+        id: detect
+        working-directory: cv-src
+        run: |
+          root="$ROOT_FILE"
+          if [ -z "$root" ]; then
+            root=$(grep -l '^[^%]*\\documentclass' *.tex | head -n 1)
+          fi
+          [ -n "$root" ] || { echo "No root .tex file found"; exit 1; }
+          echo "root=$root" >> "$GITHUB_OUTPUT"
+          if grep -qE '\\usepackage(\[[^]]*\])?\{(fontspec|unicode-math)\}' "$root"; then
+            echo "xelatex=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "xelatex=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Root file: $root"
+
+      - name: Compile LaTeX
+        if: steps.check.outputs.changed == 'true'
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: cv-src
+          root_file: ${{ steps.detect.outputs.root }}
+          latexmk_use_xelatex: ${{ steps.detect.outputs.xelatex }}
+
+      - name: Commit updated CV
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          root='${{ steps.detect.outputs.root }}'
+          cp "cv-src/${root%.tex}.pdf" "$CV_PDF"
+          echo '${{ steps.check.outputs.sha }}' > "$SHA_FILE"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898519+github-actions[bot]@users.noreply.github.com'
+          git add "$CV_PDF" "$SHA_FILE"
+          git commit -m "Update CV from Overleaf (${{ steps.check.outputs.sha }})"
+          git push
